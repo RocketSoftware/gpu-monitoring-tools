@@ -6,11 +6,11 @@ COPY . .
 
 RUN make binary check-format
 
-FROM nvcr.io/nvidia/cuda:11.2.1-base-ubi8
+FROM nvidia/cuda-ppc64le:11.2.1-base-ubi8
 LABEL io.k8s.display-name="NVIDIA DCGM Exporter"
 
 ARG DCGM_VERSION
-RUN dnf config-manager --add-repo https://developer.download.nvidia.com/compute/cuda/repos/rhel8/x86_64/cuda-rhel8.repo &&  \
+RUN dnf config-manager --add-repo https://developer.download.nvidia.com/compute/cuda/repos/rhel8/ppc64le/cuda-rhel8.repo &&  \
     dnf clean expire-cache
 RUN dnf install -y datacenter-gpu-manager-${DCGM_VERSION}
 
